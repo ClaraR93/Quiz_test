@@ -12,7 +12,7 @@ const questions = [
         question: "How much time are you willing to spend on the activity",
         answers: ["1-2 hours", "Short outings or half-day trips", "Full day out"],
     },
-    
+
 ];
 
 // Keep track of the current question index
@@ -49,4 +49,4 @@ function askQuestions() {
 askQuestions();
 
 
-console.log("HELLO");
+const radioButton = document.querySelectorAll('input[type="radio"]');
