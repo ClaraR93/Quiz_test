@@ -20,10 +20,7 @@ const questions = [
 // Keep track of the current question index
 let currentQuestionIndex = 0;
 
-
-//An empty array to store user answers
-let userAnswers = [];
-
+const radioButtons = document.querySelectorAll('input[type="radio"]');
 
 // Function to update the form with the next question and answers
 function askQuestions() {
@@ -40,7 +37,6 @@ function askQuestions() {
     document.getElementById("label-c").innerHTML = answerC;
 
     // Clear any previous selections when user selects next question
-    const radioButtons = document.querySelectorAll('input[type="radio"]');
     radioButtons.forEach((radio) => {
         radio.checked = false;
     });
@@ -78,6 +74,24 @@ function insertSubmitButton() {
     const form = document.querySelector(".quiz-box");
     form.insertAdjacentHTML("beforeend", submitButtonHtml);
     nextButton.style.display = "none";
+}
+
+function getUserAnswers() {
+    //An empty array to store user answers
+    let userAnswers = [];
+
+     // Loop through the radio buttons
+  radioButtons.forEach((radio) => {
+    // Check if the radio button is checked
+    if (radio.checked) {
+      // Push the value (user input) into the userAnswers array
+      userAnswers.push(radio.value);
+    }
+  });
+  
+console.log(userAnswers);
+
+return userAnswers;
 }
 
 askQuestions();
