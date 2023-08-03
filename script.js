@@ -22,12 +22,8 @@ let currentQuestionIndex = 0;
 function askQuestions() {
     // Check if all questions have been asked
     if (currentQuestionIndex >= questions.length) {
-        // Display the final results or navigate to a results page
-        // For simplicity, let's assume you display the results here
-        document.getElementById("question").innerHTML = "Quiz Complete!";
-        document.getElementById("label-a").innerHTML = "";
-        document.getElementById("label-b").innerHTML = "";
-        document.getElementById("label-c").innerHTML = "";
+        // Display the final results 
+        displayResults();
         return;
     }
 
@@ -41,25 +37,33 @@ function askQuestions() {
     document.getElementById("label-b").innerHTML = answerB;
     document.getElementById("label-c").innerHTML = answerC;
 
-    // Increment the question index for the next call
-    currentQuestionIndex++;
+    //Increment through the questions array by 1
+    currentQuestionIndex ++;
 }
 
-// Call askQuestion() to start the quiz
-askQuestions();
+//An empty array to store user answers
+let userAnswers = [];
 
-//On click, the 'next' button generates the next set of questions
-const nextButton = document.getElementById("next-button");
-nextButton.addEventListener("click", askQuestions)
-
-
-//Checks to see if user has selected an answer before they can proceed
-function validateInput() {
-
+//Check answers and store them 
+function checkUserInput() {
+    //Defines radio button and saves as a variable
     const radioAnswers = document.querySelectorAll("input[type='radio']:checked");
+    //Check if user has selected one radio button before proceeding
+    if (radioAnswers.length === 0) {
+        alert("Please select an answer!");
+    } else {
+        askQuestions();
+    }
 
-    if (!radioAnswers) {
-        alert("Please select an answer before proceeding to the next question.");
-        return;
+    const selectedAnswers() {
+        
     }
 }
+
+//Navigate to next question in questions array when 'next' button is clicked
+const nextButton = document.getElementById("next-button");
+nextButton.addEventListener("click", checkUserInput);
+
+askQuestions(); 
+
+    
