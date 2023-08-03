@@ -48,5 +48,18 @@ function askQuestions() {
 // Call askQuestion() to start the quiz
 askQuestions();
 
+//On click, the 'next' button generates the next set of questions
+const nextButton = document.getElementById("next-button");
+nextButton.addEventListener("click", askQuestions)
 
-const radioButton = document.querySelectorAll('input[type="radio"]');
+
+//Checks to see if user has selected an answer before they can proceed
+function validateInput() {
+
+    const radioAnswers = document.querySelectorAll("input[type='radio']:checked");
+
+    if (!radioAnswers) {
+        alert("Please select an answer before proceeding to the next question.");
+        return;
+    }
+}
