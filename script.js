@@ -18,6 +18,9 @@ const questions = [
 // Keep track of the current question index
 let currentQuestionIndex = 0;
 
+//An empty array to store user answers
+let userAnswers = [];
+
 // Function to update the form with the next question and answers
 function askQuestions() {
     // Check if all questions have been asked
@@ -39,24 +42,23 @@ function askQuestions() {
 
     //Increment through the questions array by 1
     currentQuestionIndex ++;
+
+    // Clear any previous selections when user selects next question
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach((radio) => {
+        radio.checked = false;
+    });
 }
 
-//An empty array to store user answers
-let userAnswers = [];
-
-//Check answers and store them 
+ //Check if user has selected one radio button before proceeding
 function checkUserInput() {
     //Defines radio button and saves as a variable
     const radioAnswers = document.querySelectorAll("input[type='radio']:checked");
-    //Check if user has selected one radio button before proceeding
+   
     if (radioAnswers.length === 0) {
         alert("Please select an answer!");
     } else {
         askQuestions();
-    }
-
-    const selectedAnswers() {
-        
     }
 }
 
@@ -66,4 +68,18 @@ nextButton.addEventListener("click", checkUserInput);
 
 askQuestions(); 
 
-    
+
+// Function to store the radio answer values in the userAnswers array
+function storeRadioAnswerValues() {
+    const radioInputs = document.querySelectorAll("input[type='radio']:checked");
+    const answerValues = Array.from(radioInputs).map((input) => input.value);
+    return answerValues;
+}
+
+// Example usage: Call the function when the user clicks a "Submit" button
+const submitButton = document.getElementById("submit-button");
+submitButton.addEventListener("click", function () {
+    userAnswers = storeRadioAnswerValues();
+    console.log(userAnswers); // Display the user's answers in the console (for demonstration purposes)
+    // Now you have the user's answers stored in the 'userAnswers' array and can process them as needed.
+});
