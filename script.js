@@ -86,14 +86,21 @@ function runQuiz() {
     hideSubmitButton();
 
     nextButton.addEventListener("click", validateUserInput);
+    submitButton.addEventListener("click", validateUserSubmission);
 
     // Call askQuestions() to start the quiz
     askQuestions();
 }
 
 
-function validateUserSubmission(){
-
+function validateUserSubmission(){  
+    const finalRadioAnswer = document.querySelectorAll("input[type='radio']:checked");
+    if (finalRadioAnswer.length === 0) {
+        alert("Please select final answer!");
+    } else {
+        //loggin a message for testing
+        console.log("user submission is valid");
+    }
 }
 
 function storeUserAnswers() {
