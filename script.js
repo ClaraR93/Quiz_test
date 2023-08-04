@@ -26,6 +26,9 @@ const nextButton = document.getElementById("next-button");
 // Add event listener to the "Submit" button
 const submitButton = document.getElementById("submit-button");
 
+//Add event listener to checked radio button
+let checkedButton = document.querySelector("[name='answers']:checked");
+
 // Function to hide the submit button initially
 function hideSubmitButton() {
     const submitButton = document.getElementById("submit-button");
@@ -81,18 +84,6 @@ function validateUserInput(){
     }
 }
 
-function runQuiz() {
-    // Hide the "Submit" button initially
-    hideSubmitButton();
-
-    nextButton.addEventListener("click", validateUserInput);
-    submitButton.addEventListener("click", validateUserSubmission);
-
-    // Call askQuestions() to start the quiz
-    askQuestions();
-}
-
-
 function validateUserSubmission(){  
     const finalRadioAnswer = document.querySelectorAll("input[type='radio']:checked");
     if (finalRadioAnswer.length === 0) {
@@ -100,11 +91,45 @@ function validateUserSubmission(){
     } else {
         //loggin a message for testing
         console.log("user submission is valid");
+
+        //showresults();
     }
 }
 
-function storeUserAnswers() {
+//WORK ON THIS FUNCTION - ARRAY NEEDS TO BE RECORDED//
 
+function storeUserAnswers() {
+    //An empty array to store user answers
+    let userAnswers = [];
+    nextButton.addEventListener("click", function() {
+        if (checkedButton != null) {
+            userAnswers.push(checkedButton.value);
+        }
+        console.log(userAnswers);
+    });
+    submitButton.addEventListener("click", function() {
+        if (checkedButton !=null) {
+            userAnswers.push(checkedButton.value);
+        }
+        console.log(userAnswers);
+    });
+}
+
+function runQuiz() {
+    // Hide the "Submit" button initially
+    hideSubmitButton();
+
+    //Event listener for next button to check if user has submitted input
+    nextButton.addEventListener("click", validateUserInput);
+
+    //Event listener for submit button to check if user has submitted last input
+    submitButton.addEventListener("click", validateUserSubmission);
+
+    //Strore user inputs in an empty array
+    storeUserAnswers();
+
+    // Call askQuestions() to start the quiz
+    askQuestions();
 }
 
 function calulateScore() {
