@@ -100,17 +100,20 @@ function validateUserSubmission(){
 //An empty array to store user answers
 let userAnswers = [];    
 
+let nextButtonClicked = false;
+
+nextButton.addEventListener("click", function () {
+    nextButtonClicked = true;
+});
+
 //Function to store user radio button selections in userAnswer array
 function storeUserAnswers(event) {
-    const nextButtonlogged = document.getElementById("next-button");
     const selectedRadioButton = event.target;
-    if (selectedRadioButton.checked && nextButtonlogged.checked) {
+    if (selectedRadioButton.checked && nextButtonClicked) {
         userAnswers[currentQuestionIndex -1] = selectedRadioButton.value;
         console.log(userAnswers);
     }
 }
-
-checkedButton.addEventListener("click", storeUserAnswers);
 
 function runQuiz() {
     // Hide the "Submit" button initially
